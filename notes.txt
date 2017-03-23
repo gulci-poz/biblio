@@ -6,8 +6,9 @@ pip search django
 # rypress.com/tutorials/git/index
 # https://git-scm.com/book/en/v2
 
-# śledzenie zdalnej gałęzi
--u | --set-upstream
+# śledzenie zdalnej gałęzi, np. przy wykonywaniu git pull
+# --set-upstream jest deprecated
+git push -u | --set-upstream github master
 # przełączenie śledzonej gałęzi w dowolnym czasie:
 --set-upstream-to
 
@@ -15,20 +16,22 @@ pip search django
 git rm --cached .idea -r
 git rm --cached __pycache__ -r
 
-"be verbose"
+# list zdalnych repozytoriów
+git remote
+# verbose
 git remote -v
 
-list zdalnych repozytoriów
-git remote
+# pobranie zmian, bez wdrożenia na system plików, obie rzeczy robi git pull
+git fetch
 
-wyświetla gałęzie
+# wyświetla gałęzie
 git branch
-dla każdego błędu nowa gałąź
+# dla każdego błędu tworzymy nową gałąź
 
-przełączenie z utworzeniem nowej gałęzi
+# przełączenie z utworzeniem nowej gałęzi
 git checkout -b fix-1
 
-przejście do gałęzi
+# przejście do gałęzi
 git checkout master
 
 wskazanie jak zrobić push w gałęzi, gdy push jeszcze nie był wykonany
