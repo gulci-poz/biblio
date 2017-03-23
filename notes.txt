@@ -1,16 +1,10 @@
-pip install "django==1.10.6"
-pip install "django>=1.10,<1.11"
-pip search django
-
-# tutorial i książka:
 # rypress.com/tutorials/git/index
+# https://www.atlassian.com/git/tutorials/
 # https://git-scm.com/book/en/v2
 
-# śledzenie zdalnej gałęzi, np. przy wykonywaniu git pull
+# śledzenie zdalnej gałęzi
 # --set-upstream jest deprecated
-git push -u | --set-upstream github master
-# przełączenie śledzonej gałęzi w dowolnym czasie:
---set-upstream-to
+git push | pull -u github master
 
 # dodaje do .gitignore
 git rm --cached .idea -r
@@ -21,28 +15,29 @@ git remote
 # verbose
 git remote -v
 
-# pobranie zmian, bez wdrożenia na system plików, obie rzeczy robi git pull
+# pobranie zmian, bez wdrożenia na system plików, obie te rzeczy robi git pull
 git fetch
 
 # wyświetla gałęzie
 git branch
 # dla każdego błędu tworzymy nową gałąź
 
-# przełączenie z utworzeniem nowej gałęzi
-git checkout -b fix-1
+# przełączenie z utworzeniem nowej gałęzi (-b)
+git checkout -b test1
 
 # przejście do gałęzi
 git checkout master
 
-wskazanie jak zrobić push w gałęzi, gdy push jeszcze nie był wykonany
-zostanie utworzona nowa gałąź w zdalnym repo
-git push --set-upstream origin fix-1
-(działa też z pull)
+# push do nowej gałęzi - nowa gałąź zostanie utworzona w zdalnym repo
+# w przypadku pull nowa gałąź może zostać utworzona lokalnie
+# w obu przypadkach mamy od razu tracking
+git push -u github test1
 
-master to jest kod produkcyjny, nie powinno się z niego korzystać
-dev to gałąź developerska
-fix robimy na gałęzi, na której wystąpił błąd
-gałęzie są tworzone od aktywnej gałęzi
+# w master mamy kod produkcyjny, nie powinno się z niego korzystać
+# gałęzie są tworzone od aktywnej gałęzi
+
+# jeśli użyjemy id issue, np. #1, to w liście issue będziemy mieli zaznaczone,
+# że dany commit robił referencję do issue
 
 używamy git flow do ogarnięcia gałęzi
 git flow init
@@ -56,13 +51,11 @@ git branch -d gałąź
 
 git push --all
 
-zgłaszanie własnych zmian w kodzie - mechanizm pull request przy forkach
-
-https://www.atlassian.com/git/tutorials/
-
 ==================================================
 
-python -c "import django; print django.get_version()"
+pip install "django==1.10.6"
+pip install "django>=1.10,<1.11"
+pip search django
 
 w django mamy MTV - Model, Template, View
 View wyciąga dane z Model i przygotowuje do wyświetlania w Template
