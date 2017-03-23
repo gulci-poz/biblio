@@ -1,0 +1,184 @@
+pip install "django==1.10.6"
+pip install "django>=1.10,<1.11"
+pip search django
+
+# tutorial i książka:
+# rypress.com/tutorials/git/index
+# https://git-scm.com/book/en/v2
+
+# śledzenie zdalnej gałęzi
+-u | --set-upstream
+# przełączenie śledzonej gałęzi w dowolnym czasie:
+--set-upstream-to
+
+# dodaje do .gitignore
+git rm --cached .idea -r
+git rm --cached __pycache__ -r
+
+"be verbose"
+git remote -v
+
+list zdalnych repozytoriów
+git remote
+
+wyświetla gałęzie
+git branch
+dla każdego błędu nowa gałąź
+
+przełączenie z utworzeniem nowej gałęzi
+git checkout -b fix-1
+
+przejście do gałęzi
+git checkout master
+
+wskazanie jak zrobić push w gałęzi, gdy push jeszcze nie był wykonany
+zostanie utworzona nowa gałąź w zdalnym repo
+git push --set-upstream origin fix-1
+(działa też z pull)
+
+master to jest kod produkcyjny, nie powinno się z niego korzystać
+dev to gałąź developerska
+fix robimy na gałęzi, na której wystąpił błąd
+gałęzie są tworzone od aktywnej gałęzi
+
+używamy git flow do ogarnięcia gałęzi
+git flow init
+przełączy nas od razu na gałąź develop
+
+obie gałęzie będą miały taką samą zawartość
+git merge fix-1
+
+kasowanie gałęzi
+git branch -d gałąź
+
+git push --all
+
+zgłaszanie własnych zmian w kodzie - mechanizm pull request przy forkach
+
+https://www.atlassian.com/git/tutorials/
+
+==================================================
+
+python -c "import django; print django.get_version()"
+
+w django mamy MTV - Model, Template, View
+View wyciąga dane z Model i przygotowuje do wyświetlania w Template
+Template jest odpowiednikiem MVC.View
+View analizuje ścieżkę URL i poprzez View wyciąga Model
+
+./manage.py migrate
+./manage.py runserver (możemy to robić na screen)
+
+każdy projekt jest tak naprawdę aplikacją
+projekt jest nadrzędnym bytem (np. cała strona, witryna)
+
+jedna aplikacja - jedno zadanie; dużo małych aplikacji
+./manage.py startapp
+
+admin.py
+konfiguracja panelu administratora, podłączenia modeli
+
+migrations
+zmiany modeli w bazie
+
+models.py
+definiujemy jak będą wyglądały obiekty w bazie danych
+
+test.py
+testy
+
+views.py
+realizacja części View
+
+w py3 nie trzeba w ogóle informować o kodowaniu, wszystkie pliki są w UTF-8
+
+sqlite3 db.sqlite3
+.schema
+pokazuje tebele dla sqlite
+
+po dodaniu modelu danych w models.py trzeba dodać aplikację shelf w settings.py (INSTALLED_APPS)
+robimy schema migration, informacje o zmianie struktury bazy są przechowywane w plikach w folderze migrations
+./manage.py makemigrations
+migracji można nadać nazwę używając --name
+sychronizacja bazy danych z obecnymi modelami i migracjami (anjpierw synchronizuje niezmigrowane aplikacje, robi to samo co syncdb, a potem przeprowadza migracje, które jeszcze nie zostały przeprowadzone)
+./manage.py migrate
+
+migracje danych robimy przygotowując pusty plik migracji (makemigrations) i po uzupełnieniu robimy migrację (migrate), synchronizacja danych zostanie wykonana automatycznie z sychronizacją bazy
+
+jeśli mamy zmianę typu pola, to lepiej zrobić nowe pole z nowym typem niż dawać nowy typ do istniejącego pola (u nas np. zmiana author na authors); koniecznie jeśli mamy zmianę typów relacyjnych np. ForeignKey na ManyToManyField, mniej ważne przy zmianie danych numerycznych i tekstowych
+
+./manage.py createsuperuser
+
+rejestrujemy model w admin.py
+
+mamy dostęp do shella django
+./manage.py shell
+django rozpoznaje, że jest ipython i automatycznie się do niego przełącza
+możemy przeglądać modele (przyda się potem przy zapytaniach do db)
+from shelf.models import Author
+Author.objects.all()
+
+django guardian - aplikacja do nadawania uprawnień do obiektów
+
+dołączam model do widoku w views.py i zapisuję url do widoku w urls.py
+szablony
+
+przechodzi całe drzewo projektu i wyciąga stringi do translacji, tworzy lub uaktualnia plik message; trzeba samemu utworzyć folder locale
+./manage.py makemessages -l pl
+dostajemy plik .po (Portable Object)
+jeśli tego nie zrobiliśmy po dodaniu funkcji _ (ugettext_lazy), to teraz trzeba
+./manage.py makemigrations
+./manage.py migrate
+trzeba dodać LOCALE_PATH do settings.py
+django-admin compilemessages
+dostajemy plik .mo (top level locale)
+plik binarny zoptymalizowany do użycia przez ugettext_lazy
+aplikacje:poedit (sudo dnf install pootle)
+pootle (napisany w django, działa w py2, wymaga import pootle)
+
+użycie shell:
+from shelf.models import Author, Book, BookItem, BookEdition, BookCategory, Publisher
+Author.objects.all()
+autor = Author()
+autor.first_name = "Mario"
+autor.last_name = "Vargas Llosa"
+autor.save()
+autor.id
+(autor.pk)
+#dopóki obiekt nie jest zapisany w bazie, to nie ma id; sposób na sprawdzenie obecności modelu (obiektu, nazywa go też modelem) w bazie
+a = Author(first_name = "Juliusz", last_name = "Verne")
+a.save()
+a2 = Author.objects.create()
+#stworzyliśmy obiekt, który został dodany do bazy, ale ma puste pola
+a2.id
+a2.first_name
+#id pozostanie zajęte
+a2.delete()
+a2 = Author.objects.create(first_name = "Henryk", last_name = "Sienkiewicz")
+#atrybut objects jest powiązany z managerem obiektów, sposób na dostanie się do bazy danych
+#tutaj zostało wykonane zapytanie
+Author.objects.all()
+#tutaj nie
+value = Author.objects.all()
+type(value)
+#dostajemy QuerySet, typ leniwy, pośrednik w dostępnie do bazy
+#teraz dopiero poszło zapytanie do bazy
+value.filter(last_name__contains = "wicz")
+#dodawanie autorów do ManyToMany (jak zrobić w dj w panelu adm. szukanie search_fields po ManyToMany?)
+ac1 = Author(first_name = "Brian", last_name = "Kernighan")
+ac1.save()
+ac2 = Author(first_name = "Dennis", last_name = "Ritchie")
+ac2.save()
+#nie możemy pod authors podstawić autora (obiektu), może uda się listę?
+book = Book.objects.create(title = "Język C")
+#tu mamy relację
+book.authors
+#tu się dowiadujemy, że mamy pustą listę
+book.authors.all()
+book.authors.add(ac1)
+book.authors.add(ac2)
+book.save()
+#nowa sesja + import
+b = Book.objects.all().last()
+b
+b.authors.all()
