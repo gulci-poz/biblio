@@ -52,6 +52,8 @@ git merge test1
 # jeśli jest konflikt, to po wprowadzeniu poprawek robimy commit
 # w przypadku pull request możemy mergować w githubie
 
+# gałąź test1 pozostaje w repo, możemy dalej z niej korzystać
+
 # kasowanie gałęzi
 git branch -d <name>
 # jeśli gałąź nie jest zmergowana, to musimy potwierdzić jej usunięcie
