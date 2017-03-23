@@ -31,9 +31,10 @@ git branch test1
 git checkout master
 
 # push do nowej gałęzi - nowa gałąź zostanie utworzona w zdalnym repo
-# w przypadku pull nowa gałąź może zostać utworzona lokalnie
-# w obu przypadkach mamy od razu tracking
 git push -u github test1
+# w przypadku pull nowa gałąź jest tworzona lokalnie
+git pull github test1
+# przy checkout automatycznie zostanie ustawiony tracking
 
 # w master mamy kod produkcyjny, nie powinno się z niego korzystać
 # gałęzie są tworzone od aktywnej gałęzi
