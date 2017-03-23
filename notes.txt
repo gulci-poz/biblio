@@ -39,6 +39,8 @@ git push -u github test1
 # jeśli użyjemy id issue, np. #1, to w liście issue będziemy mieli zaznaczone,
 # że dany commit robił referencję do issue
 
+# komentarz w tym samym miejscu, co w branchu test1
+
 używamy git flow do ogarnięcia gałęzi
 git flow init
 przełączy nas od razu na gałąź develop
