@@ -46,8 +46,10 @@ przełączy nas od razu na gałąź develop
 obie gałęzie będą miały taką samą zawartość
 git merge fix-1
 
-kasowanie gałęzi
-git branch -d gałąź
+# kasowanie gałęzi
+git branch -d <name>
+# jeśli gałąź nie jest zmergowana, to musimy potwierdzić jej usunięcie
+git branch -D <name>
 
 git push --all
 
