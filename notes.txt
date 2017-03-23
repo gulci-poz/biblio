@@ -39,17 +39,15 @@ git push -u github test1
 # jeśli użyjemy id issue, np. #1, to w liście issue będziemy mieli zaznaczone,
 # że dany commit robił referencję do issue
 
-# dwa akapity do rewizji i aktualizacji, branch test1
-
 # używamy git flow do ogarnięcia gałęzi
 sudo apt-get install git-flow
 git flow init
-przełączy nas od razu na gałąź develop
 
-# możemy zrobić ręcznie merge lub pull request i zmergować w github
-obie gałęzie będą miały taką samą zawartość
+# możemy zrobić ręcznie merge
 # jesteśmy na master
 git merge test1
+# jeśli nie ma konfliktów, to automatycznie kopiowane są commity z mergowanej gałęzi
+# jeśli ktoś zrobi pull request, to możemy mergować w githubie
 
 # kasowanie gałęzi
 git branch -d <name>
