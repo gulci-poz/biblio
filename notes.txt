@@ -4,7 +4,7 @@
 
 # śledzenie zdalnej gałęzi
 # --set-upstream jest deprecated
-git push | pull -u github master
+git push -u github master
 
 # dodaje do .gitignore
 git rm --cached .idea -r
@@ -49,7 +49,8 @@ git flow init
 # możemy zrobić ręcznie merge
 # jesteśmy na master
 git merge test1
-# jeśli nie ma konfliktów, to automatycznie kopiowane są commity z mergowanej gałęzi
+# jeśli nie ma konfliktów,
+# to automatycznie kopiowane są commity z mergowanej gałęzi
 # jeśli jest konflikt, to po wprowadzeniu poprawek robimy commit
 # w przypadku pull request możemy mergować w githubie
 
@@ -70,59 +71,28 @@ pip install "django>=1.10,<1.11"
 pip search django
 
 w django mamy MTV - Model, Template, View
-View wyciąga dane z Model i przygotowuje do wyświetlania w Template
+View wyciąga dane z Model
+i przygotowuje do wyświetlania za pomocą wzorca Template
 Template jest odpowiednikiem MVC.View
-View analizuje ścieżkę URL i poprzez View wyciąga Model
+View analizuje ścieżkę URL
 
-./manage.py migrate
-./manage.py runserver (możemy to robić na screen)
-
-każdy projekt jest tak naprawdę aplikacją
 projekt jest nadrzędnym bytem (np. cała strona, witryna)
-
+projekt to również aplikacja
 jedna aplikacja - jedno zadanie; dużo małych aplikacji
-./manage.py startapp
-
-admin.py
-konfiguracja panelu administratora, podłączenia modeli
-
-migrations
-zmiany modeli w bazie
-
-models.py
-definiujemy jak będą wyglądały obiekty w bazie danych
-
-test.py
-testy
-
-views.py
-realizacja części View
-
-w py3 nie trzeba w ogóle informować o kodowaniu, wszystkie pliki są w UTF-8
 
 sqlite3 db.sqlite3
 .schema
 pokazuje tebele dla sqlite
 
-po dodaniu modelu danych w models.py trzeba dodać aplikację shelf w settings.py (INSTALLED_APPS)
-robimy schema migration, informacje o zmianie struktury bazy są przechowywane w plikach w folderze migrations
-./manage.py makemigrations
+w momencie utworzenia klasy modelu mamy dostępny obiekt danych z jego metodami
 migracji można nadać nazwę używając --name
-sychronizacja bazy danych z obecnymi modelami i migracjami (anjpierw synchronizuje niezmigrowane aplikacje, robi to samo co syncdb, a potem przeprowadza migracje, które jeszcze nie zostały przeprowadzone)
-./manage.py migrate
 
-migracje danych robimy przygotowując pusty plik migracji (makemigrations) i po uzupełnieniu robimy migrację (migrate), synchronizacja danych zostanie wykonana automatycznie z sychronizacją bazy
+jeśli mamy zmianę typu pola, to lepiej zrobić nowe pole z nowym typem
+niż dawać nowy typ do istniejącego pola
 
-jeśli mamy zmianę typu pola, to lepiej zrobić nowe pole z nowym typem niż dawać nowy typ do istniejącego pola (u nas np. zmiana author na authors); koniecznie jeśli mamy zmianę typów relacyjnych np. ForeignKey na ManyToManyField, mniej ważne przy zmianie danych numerycznych i tekstowych
+koniecznie jeśli mamy zmianę typów relacyjnych np. ForeignKey na ManyToManyField,
+mniej ważne przy zmianie danych numerycznych i tekstowych
 
-./manage.py createsuperuser
-
-rejestrujemy model w admin.py
-
-mamy dostęp do shella django
-./manage.py shell
-django rozpoznaje, że jest ipython i automatycznie się do niego przełącza
-możemy przeglądać modele (przyda się potem przy zapytaniach do db)
 from shelf.models import Author
 Author.objects.all()
 
