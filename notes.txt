@@ -90,16 +90,17 @@ migracji można nadać nazwę używając --name
 jeśli mamy zmianę typu pola, to lepiej zrobić nowe pole z nowym typem
 niż dawać nowy typ do istniejącego pola
 
-koniecznie jeśli mamy zmianę typów relacyjnych np. ForeignKey na ManyToManyField,
+koniecznie jeśli mamy zmianę typów relacyjnych,
+np. ForeignKey na ManyToManyField,
 mniej ważne przy zmianie danych numerycznych i tekstowych
 
+manage.py shell
 from shelf.models import Author
 Author.objects.all()
 
 django guardian - aplikacja do nadawania uprawnień do obiektów
 
 dołączam model do widoku w views.py i zapisuję url do widoku w urls.py
-szablony
 
 przechodzi całe drzewo projektu i wyciąga stringi do translacji, tworzy lub uaktualnia plik message; trzeba samemu utworzyć folder locale
 ./manage.py makemessages -l pl
