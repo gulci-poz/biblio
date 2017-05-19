@@ -1,6 +1,6 @@
 from django.conf.urls import url
 
-from shelf.views import AuthorDetailView, AuthorListView
+from .views import AuthorDetailView, AuthorListView
 
 # alternatywnie do namespace w include() w nadrzędnym pliku urls.py
 # app_name = 'shelf'

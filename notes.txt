@@ -108,6 +108,11 @@ w przypadku widoków generycznych nazwa przekazanego z urla pola
 musi być oznaczona pk lub slug (nie id)
 funkcja .as_view() zwraca funkcję widoku
 
+formularz jest domyślnie przekazywany do szablonu pod zmienną form
+formularz jest domyślnie wyświetlany jako tabela
+(za pomocą funkcji .as_table(), można też użyć .as_p();
+w shellu robimy wywołanie funkcji, w szablonie piszemy tylko form.as_p)
+
 przechodzi całe drzewo projektu i wyciąga stringi do translacji, tworzy lub uaktualnia plik message; trzeba samemu utworzyć folder locale
 ./manage.py makemessages -l pl
 dostajemy plik .po (Portable Object)

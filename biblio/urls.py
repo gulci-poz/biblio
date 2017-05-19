@@ -19,4 +19,5 @@ from django.contrib import admin
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^shelf/', include('shelf.urls', namespace='shelf')),
+    url(r'^contact/', include('contact.urls', namespace='contact')),
 ]
