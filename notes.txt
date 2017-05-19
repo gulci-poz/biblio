@@ -101,6 +101,12 @@ Author.objects.all()
 django guardian - aplikacja do nadawania uprawnień do obiektów
 
 dołączam model do widoku w views.py i zapisuję url do widoku w urls.py
+w przypadku widoków generycznych widok przekazuje dane do szablonu
+pod zmienną object_list lub object (detail)
+grupę przekazanych do szablonu zmiennych nazywamy kontekstem
+w przypadku widoków generycznych nazwa przekazanego z urla pola
+musi być oznaczona pk lub slug (nie id)
+funkcja .as_view() zwraca funkcję widoku
 
 przechodzi całe drzewo projektu i wyciąga stringi do translacji, tworzy lub uaktualnia plik message; trzeba samemu utworzyć folder locale
 ./manage.py makemessages -l pl
