@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'shelf.apps.ShelfConfig',
     'contact.apps.ContactConfig',
+    'rental.apps.RentalConfig',
 ]
 
 MIDDLEWARE = [
@@ -120,3 +121,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
+
+LOCALE_PATH = os.path.join(BASE_DIR, 'locale')

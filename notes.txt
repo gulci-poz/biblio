@@ -89,10 +89,13 @@ migracji można nadać nazwę używając --name
 
 jeśli mamy zmianę typu pola, to lepiej zrobić nowe pole z nowym typem
 niż dawać nowy typ do istniejącego pola
-
 koniecznie jeśli mamy zmianę typów relacyjnych,
 np. ForeignKey na ManyToManyField,
 mniej ważne przy zmianie danych numerycznych i tekstowych
+
+makemigrations robi migrację schematu, w przypadku utworzenia nowego pola
+i usunięcią starego (u nas usuwamy author, a tworzymy authors) musimy pamiętać
+o migracji danych (produkcja)
 
 manage.py shell
 from shelf.models import Author
@@ -113,17 +116,40 @@ formularz jest domyślnie wyświetlany jako tabela
 (za pomocą funkcji .as_table(), można też użyć .as_p();
 w shellu robimy wywołanie funkcji, w szablonie piszemy tylko form.as_p)
 
-przechodzi całe drzewo projektu i wyciąga stringi do translacji, tworzy lub uaktualnia plik message; trzeba samemu utworzyć folder locale
-./manage.py makemessages -l pl
+auto_now_add - data będzie dodana przy tworzeniu obiektu,
+nie będzie można jej zmienić, nawet w panelu admina
+auto_now - data będzie zmieniana przy każdej zmianie modelu
+default z datetime.now() - nadawanie tej samej daty
+przy starcie aplikacji (modelu)
+można użyć datetime.now - funkcja zostanie wykonana przy tworzeniu obiektu
+trzeba użyć now z django - uwzględnia strefy czasowe
+
+blank=True - informacja dla front-endu, że pole formularza może być puste
+w przypadku pola tekstowego nie ustawiamy null=True, tylko blank=True,
+inaczej może to być interpretowane, że pole ma dwie wartości
+
+lokalizacja:
+importujemy ugettext_lazy jako _
+wersja lazy używa w miarę możliwości referencji do stringów z modelu
+tłumaczenie pól modelu (używamy atrybutu verbose_name)
+tłumaczenie tekstu do formatowania (nie samego formatowania)
+tłumaczenie nazwy modelu (w class Meta)
+musimy zrobić makemigrations i migrate
+trzeba dodać LOCALE_PATH do settings.py (tworzymy folder locale)
+LOCALE_PATH = os.path.join(BASE_DIR, 'locale')
+
+makemessages przechodzi całe drzewo projektu i wyciąga stringi do translacji,
+tworzy lub uaktualnia plik message
+musimy podać parametr -p pl
+python manage.py makemessages -l pl
+(lub django-admin makemessages)
 dostajemy plik .po (Portable Object)
-jeśli tego nie zrobiliśmy po dodaniu funkcji _ (ugettext_lazy), to teraz trzeba
-./manage.py makemigrations
-./manage.py migrate
-trzeba dodać LOCALE_PATH do settings.py
+
 django-admin compilemessages
 dostajemy plik .mo (top level locale)
 plik binarny zoptymalizowany do użycia przez ugettext_lazy
-aplikacje:poedit (sudo dnf install pootle)
+
+aplikacje: poedit (sudo apt-get install pootle)
 pootle (napisany w django, działa w py2, wymaga import pootle)
 
 użycie shell:

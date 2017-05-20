@@ -1,13 +1,24 @@
 from django.db import models
+from django.utils.translation import ugettext_lazy as _
 
 
 class Author(models.Model):
-    first_name = models.CharField(max_length=20)
-    last_name = models.CharField(max_length=50)
+    # pierwszy atrybut to verbose_name (nie w polach relacyjnych)
+    first_name = models.CharField(_('first_name'), max_length=20)
+    last_name = models.CharField(_('last_name'), max_length=50)
 
     def __str__(self):
-        return "{first_name} {last_name}" \
+        return _("{first_name} {last_name}") \
             .format(first_name=self.first_name, last_name=self.last_name)
+
+    class Meta:
+        # sortowanie danych w bazie
+        ordering = ('last_name', 'first_name')
+
+        # po polsku w dopełniaczu
+        verbose_name = _('author')
+
+        verbose_name_plural = _('authors')
 
 
 class Publisher(models.Model):
@@ -23,6 +34,9 @@ class BookCategory(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        verbose_name_plural = 'book categories'
+
 
 class Book(models.Model):
     """
@@ -30,6 +44,7 @@ class Book(models.Model):
     """
     title = models.CharField(max_length=100)
     authors = models.ManyToManyField(Author)
+    categories = models.ManyToManyField(BookCategory)
 
     def __str__(self):
         return "{title}".format(title=self.title)
