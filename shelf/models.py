@@ -49,6 +49,15 @@ class Book(models.Model):
     def __str__(self):
         return "{title}".format(title=self.title)
 
+    def get_authors(self):
+        authors = self.authors.all()
+        authors_str = ''
+
+        for author in authors:
+            authors_str = authors_str + ' ' + author.__str__()
+
+        return authors_str.strip()
+
 
 class BookEdition(models.Model):
     """

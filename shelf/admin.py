@@ -11,7 +11,7 @@ class AuthorAdmin(admin.ModelAdmin):
 
 class BookAdmin(admin.ModelAdmin):
     search_fields = ['title']
-    list_display = ['title']
+    list_display = ['title', 'get_authors']
 
 admin.site.register(Author, AuthorAdmin)
 admin.site.register(Book, BookAdmin)

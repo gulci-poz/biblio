@@ -97,10 +97,6 @@ makemigrations robi migrację schematu, w przypadku utworzenia nowego pola
 i usunięcią starego (u nas usuwamy author, a tworzymy authors) musimy pamiętać
 o migracji danych (produkcja)
 
-manage.py shell
-from shelf.models import Author
-Author.objects.all()
-
 django guardian - aplikacja do nadawania uprawnień do obiektów
 
 dołączam model do widoku w views.py i zapisuję url do widoku w urls.py
@@ -153,7 +149,8 @@ aplikacje: poedit (sudo apt-get install pootle)
 pootle (napisany w django, działa w py2, wymaga import pootle)
 
 użycie shell:
-from shelf.models import Author, Book, BookItem, BookEdition, BookCategory, Publisher
+from shelf.models import \
+Author, Book, BookItem, BookEdition, BookCategory, Publisher
 Author.objects.all()
 autor = Author()
 autor.first_name = "Mario"
@@ -161,40 +158,49 @@ autor.last_name = "Vargas Llosa"
 autor.save()
 autor.id
 (autor.pk)
-#dopóki obiekt nie jest zapisany w bazie, to nie ma id; sposób na sprawdzenie obecności modelu (obiektu, nazywa go też modelem) w bazie
+# jeśli obiekt nie jest zapisany w bazie, to nie ma id
 a = Author(first_name = "Juliusz", last_name = "Verne")
+a.id
 a.save()
+a.id
+# obiekt został dodany do bazy, ale ma puste pola
 a2 = Author.objects.create()
-#stworzyliśmy obiekt, który został dodany do bazy, ale ma puste pola
 a2.id
 a2.first_name
-#id pozostanie zajęte
+# po usunięciu obiektu id pozostanie zajęte
 a2.delete()
 a2 = Author.objects.create(first_name = "Henryk", last_name = "Sienkiewicz")
-#atrybut objects jest powiązany z managerem obiektów, sposób na dostanie się do bazy danych
-#tutaj zostało wykonane zapytanie
+# atrybut objects jest powiązany z managerem obiektów
+# manager obiektów to sposób na dostanie się do bazy danych
+# tutaj zostało wykonane zapytanie
 Author.objects.all()
-#tutaj nie
+# tutaj nie
 value = Author.objects.all()
 type(value)
-#dostajemy QuerySet, typ leniwy, pośrednik w dostępnie do bazy
-#teraz dopiero poszło zapytanie do bazy
-value.filter(last_name__contains = "wicz")
-#dodawanie autorów do ManyToMany (jak zrobić w dj w panelu adm. szukanie search_fields po ManyToMany?)
+# dostajemy QuerySet, typ leniwy, pośrednik w dostępnie do bazy
+# teraz dopiero poszło zapytanie do bazy
+value.filter(last_name__contains="wicz")
+# dodawanie autorów do ManyToMany
+# nie możemy pod authors podstawić obiektu autora
+book = Book.objects.create(title = "Język C")
 ac1 = Author(first_name = "Brian", last_name = "Kernighan")
 ac1.save()
 ac2 = Author(first_name = "Dennis", last_name = "Ritchie")
 ac2.save()
-#nie możemy pod authors podstawić autora (obiektu), może uda się listę?
-book = Book.objects.create(title = "Język C")
-#tu mamy relację
+# mamy relację (ManyRelatedManager), która ma swoje metody
 book.authors
-#tu się dowiadujemy, że mamy pustą listę
+# dowiadujemy, że mamy pustą listę
 book.authors.all()
 book.authors.add(ac1)
 book.authors.add(ac2)
 book.save()
-#nowa sesja + import
+book.authors.all()
+# sprawdzenie - nowa sesja + import
+# możemy używać indeksów
+b = Book.objects.all()[0]
+# nie możemy używać indeksów ujemnych
 b = Book.objects.all().last()
 b
 b.authors.all()
+b.authors.all()[0].id
+Author.objects.all()[0].id
