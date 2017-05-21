@@ -1,3 +1,4 @@
+from django.core.urlresolvers import reverse_lazy
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
@@ -57,6 +58,9 @@ class Book(models.Model):
             authors_str = authors_str + ' ' + author.__str__()
 
         return authors_str.strip()
+
+    def get_absolute_url(self):
+        return reverse_lazy('shelf:book-detail', kwargs={'pk': self.id})
 
     class Meta:
         ordering = ('title',)
