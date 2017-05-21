@@ -1,0 +1,4 @@
+a:link, a:link:hover, a:visited {
+    text-decoration: none;
+    color: darkred;
+}

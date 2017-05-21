@@ -123,3 +123,5 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 LOCALE_PATH = os.path.join(BASE_DIR, 'locale')
+
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
