@@ -15,4 +15,10 @@
         {% endif %}
         {% endfor %}
     </p>
+    <h3>Wydania:</h3>
+    <ul>
+        {% for edition in object.bookedition_set.all %}
+            <li>{{ edition.publisher.name }}, {{ edition.date }}</li>
+        {% endfor %}
+    </ul>
 {% endblock %}

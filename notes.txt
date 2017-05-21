@@ -228,3 +228,6 @@ a=Author.objects.all().first()
 a.book_set.all()
 
 mamy tag {% debug %} - taki sam otwierający i zamykający
+
+# po dodaniu related_name nie działa bookedition_set, ani edition_set
+book = models.ForeignKey(Book, related_name='edition')
