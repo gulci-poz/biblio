@@ -58,6 +58,9 @@ class Book(models.Model):
 
         return authors_str.strip()
 
+    class Meta:
+        ordering = ('title',)
+
 
 class BookEdition(models.Model):
     """

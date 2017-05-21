@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
+    {{ block.super }}
     <h2>Lista autorów</h2>
     <ul>
         {% for author in object_list %}

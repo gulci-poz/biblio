@@ -164,6 +164,7 @@ a.id
 a.save()
 a.id
 # obiekt został dodany do bazy, ale ma puste pola
+# create zwraca obiekt
 a2 = Author.objects.create()
 a2.id
 a2.first_name
@@ -204,3 +205,26 @@ b
 b.authors.all()
 b.authors.all()[0].id
 Author.objects.all()[0].id
+# ipython
+Author.objects?
+# po kropce możemy rozwinąć dostępne metody
+Author.objects.
+qs = Author.objects.all()
+a, created = qs.get_or_create(last_name="Crichton")
+# reprezentacja obiektowa (JSON)
+qs.values()
+b=Book.objects.all()
+qs=b.filter(authors__last_name__contains="ail")
+# zapytanie SQL
+print(qs.query)
+a=Author.objects.filter(last_name__contains="ail")
+qs=Book.objects.filter(authors__in=a)
+# szukanie połączonych z autorem książek
+# manager [book]_set jest tworzony dla obiektów,
+# które są powiązane do (<-) naszych obiektów
+# jeśli wiążemy kluczem obcym albo m2m do (->) obiektów,
+# to używamy book.authors.all()
+a=Author.objects.all().first()
+a.book_set.all()
+
+mamy tag {% debug %} - taki sam otwierający i zamykający

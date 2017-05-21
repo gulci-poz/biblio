@@ -1,9 +1,20 @@
 {% extends "base.html" %}
 
 {% block content %}
+    {{ block.super }}
     <h2>Lista utworów</h2>
-    <p>Autor: <em>{{ object.last_name }}, {{ object.first_name }}</em></p>
     <div>
         <a href="{% url 'shelf:author-list' %}">Powrót do listy autorów</a>
     </div>
+    <p>Autor: <em>{{ object.last_name }}, {{ object.first_name }}</em></p>
+    <p>Książki:</p>
+    <ul>
+        {% for book in object.book_set.all %}
+            <li>
+                <a href="{% url 'shelf:book-detail' book.id %}">
+                    {{ book.title }}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
 {% endblock %}

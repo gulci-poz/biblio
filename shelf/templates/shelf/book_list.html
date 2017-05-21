@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+    {{ block.super }}
+    <h2>Lista książek</h2>
+    <ul>
+        {% for book in object_list %}
+            <li>
+                <a href="{% url 'shelf:book-detail' book.id %}">
+                    {{ book.title }}
+                </a> -
+                {% for author in book.authors.all %}
+                    <a href="{% url 'shelf:author-detail' author.id %}">
+                        {{ author.first_name }}
+                        {{ author.last_name }}</a
+                    >{% if not forloop.last %},
+                {% endif %}
+                {% endfor %}
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
