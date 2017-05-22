@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load shelf_tags %}
 
 {% block content %}
     {{ block.super }}
@@ -18,7 +19,7 @@
     <h3>Wydania:</h3>
     <ul>
         {% for edition in object.editions.all %}
-            <li>{{ edition.publisher.name }}, {{ edition.date }}</li>
+            <li>{{ edition.publisher.name }}, {{ edition.date|pub_date }}</li>
         {% endfor %}
     </ul>
 {% endblock %}
