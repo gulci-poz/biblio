@@ -19,7 +19,8 @@ from django.contrib import admin
 from . import views
 
 urlpatterns = [
-    url(r'^$', views.home, name='home'),
+    # url(r'^$', views.home, name='home'),
+    url(r'^$', views.index_view, name='main-page'),
     url(r'^admin/', admin.site.urls),
     url(r'^shelf/', include('shelf.urls', namespace='shelf')),
     url(r'^contact/', include('contact.urls', namespace='contact')),

@@ -233,12 +233,29 @@ mamy tag {% debug %} - taki sam otwierający i zamykający
 # przy definiowaniu related_name używamy liczby mnogiej
 book = models.ForeignKey(Book, related_name='editions')
 
-custom templates
-chcemy stworzyć
-edition.date|pub_date zamiast edition.date|date:"Y"
+custom filter
+chcemy mieć edition.date|pub_date zamiast edition.date|date:"Y"
 w folderze aplikacji (shelf) tworzymy folder templatetags,
 a w nim pusty plik __init__.py
 zgodnie z konwencją (nie jest to konieczne) tworzymy plik shelf_tags.py
 trzeba zrobić restart serwera, ponieważ zmiany w tagach nie są śledzone
 śledzone są tylko pliki otwarte przy starcie aplikacji
 w produkcji trzeba dobrze ustawić serwer wsgi, które zmiany ma śledzić
+
+custom tag
+w templates aplikacji tworzymy folder tags, tam będzie szablon html
+w templatetags, w shelf_tags.py rejestrujemy funkcję definiującą tag
+
+widoki służą do przygotowywania danych (kontekstu) dla szablonów
+to samo możemy robić za pomocą tagów (widoki lite)
+
+strona główna
+w projekcie biblio definiuję widok oparty na klasie
+(home był opraty na funkcji)
+nie warto robić do strony głównej osobnej aplikacji, z obawy o niepotrzebny
+rozrost i ponowne wykorzystanie aplikacji, co nie jest wskazane
+w urls nie możemy podawać nazw widoków w cudzysłowie, musi być callable,
+w praktyce jest to funkcja widoku
+(w przypadku include musi być lista lub krotka)
+dziedzicząc z View lub TemplateView można definiować funkcje get lub post
+dla metod HTTP

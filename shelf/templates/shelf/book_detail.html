@@ -17,9 +17,5 @@
         {% endfor %}
     </p>
     <h3>Wydania:</h3>
-    <ul>
-        {% for edition in object.editions.all %}
-            <li>{{ edition.publisher.name }}, {{ edition.date|pub_date }}</li>
-        {% endfor %}
-    </ul>
+    {% show_editions object %}
 {% endblock %}
