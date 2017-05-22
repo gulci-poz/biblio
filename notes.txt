@@ -229,5 +229,6 @@ a.book_set.all()
 
 mamy tag {% debug %} - taki sam otwierający i zamykający
 
-# po dodaniu related_name nie działa bookedition_set, ani edition_set
-book = models.ForeignKey(Book, related_name='edition')
+# po dodaniu related_name przestaje działać bookedition_set na rzecz editions
+# przy definiowaniu related_name używamy liczby mnogiej
+book = models.ForeignKey(Book, related_name='editions')

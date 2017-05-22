@@ -70,7 +70,7 @@ class BookEdition(models.Model):
     """
     Wydanie książki istniejącej w bazie
     """
-    book = models.ForeignKey(Book)
+    book = models.ForeignKey(Book, related_name='editions')
     isbn = models.CharField(max_length=17)
     date = models.DateField()
     publisher = models.ForeignKey(Publisher)
