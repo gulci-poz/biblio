@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-20 06:43+0200\n"
+"POT-Creation-Date: 2017-05-23 07:50+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,23 +20,23 @@ msgstr ""
 "%100<12 || n%100>=14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n"
 "%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
 
-#: shelf/models.py:7
-msgid "first_name"
-msgstr ""
-
 #: shelf/models.py:8
-msgid "last_name"
-msgstr ""
+msgid "first_name"
+msgstr "Imię"
 
-#: shelf/models.py:11
+#: shelf/models.py:9
+msgid "last_name"
+msgstr "Nazwisko"
+
+#: shelf/models.py:12
 #, python-brace-format
 msgid "{first_name} {last_name}"
 msgstr ""
 
-#: shelf/models.py:19
+#: shelf/models.py:20
 msgid "author"
-msgstr ""
+msgstr "Autor"
 
-#: shelf/models.py:21
+#: shelf/models.py:22
 msgid "authors"
-msgstr ""
+msgstr "Autorzy"

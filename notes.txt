@@ -131,8 +131,8 @@ tłumaczenie pól modelu (używamy atrybutu verbose_name)
 tłumaczenie tekstu do formatowania (nie samego formatowania)
 tłumaczenie nazwy modelu (w class Meta)
 musimy zrobić makemigrations i migrate
-trzeba dodać LOCALE_PATH do settings.py (tworzymy folder locale)
-LOCALE_PATH = os.path.join(BASE_DIR, 'locale')
+trzeba dodać LOCALE_PATHS do settings.py (tworzymy folder locale)
+LOCALE_PATHS = [os.path.join(BASE_DIR, 'locale')]
 
 makemessages przechodzi całe drzewo projektu i wyciąga stringi do translacji,
 tworzy lub uaktualnia plik message
@@ -259,3 +259,25 @@ w praktyce jest to funkcja widoku
 (w przypadku include musi być lista lub krotka)
 dziedzicząc z View lub TemplateView można definiować funkcje get lub post
 dla metod HTTP
+
+do aplikacji auth można dołączyć swój model użytkownika
+w settings.py trzeba ustawić zmienną AUTH_USER_MODEL
+jeśli używamy klasy użytkownika jako klucza obcego, to musimy
+zapewnić użycie określonej klasy użytkownika
+robimy to przez wpisanie settings.AUTH_USER_MODEL zamiast User
+dziedziczenie modelu jest rozbudowane o dodatkowy mechanizm,
+każdy obiekt modelu ma osobną tabelę w DB,
+jeśli stworzymy nowy model na bazie innego,
+to zostaną stworzone obiekty (tabele) dla obu modeli,
+dane będą składowane w dwóch tabelach,
+dostaniemy relację one-to-one (klucz obcy do bazowej tabeli);
+można stworzyć model abstrakcyjny z podklasą Meta
+i atrybutem abstract = True,
+wtedy tylko model dziedziczący będzie instancjonowany (jedna tabela),
+nie będzie można stworzyć modelu z bazowej klasy
+(django będzie pytać czy usunąć dane typów, do których wcześniej referowaliśmy,
+trzeba wybrać nie; chodzi o typ User, musimy zrobić migrację danych)
+mamy problem, ponieważ migracje aplikacji admin były zaaplikowane
+przed migracjami dla nowego usera (mamy błąd InconsistentMigrationHistory)
+usera trzeba zaprojektować na samym początku, żeby admin miał dobrą referencję
+pomaga usunięcie bazy

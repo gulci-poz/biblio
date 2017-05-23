@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'shelf.apps.ShelfConfig',
     'contact.apps.ContactConfig',
     'rental.apps.RentalConfig',
+    'users.apps.UsersConfig',
 ]
 
 MIDDLEWARE = [
@@ -122,6 +123,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-LOCALE_PATH = os.path.join(BASE_DIR, 'locale')
+LOCALE_PATHS = [os.path.join(BASE_DIR, 'locale')]
 
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+
+AUTH_USER_MODEL = 'users.BiblioUser'
