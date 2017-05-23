@@ -120,9 +120,12 @@ przy starcie aplikacji (modelu)
 można użyć datetime.now - funkcja zostanie wykonana przy tworzeniu obiektu
 trzeba użyć now z django - uwzględnia strefy czasowe
 
-blank=True - informacja dla front-endu, że pole formularza może być puste
-w przypadku pola tekstowego nie ustawiamy null=True, tylko blank=True,
-inaczej może to być interpretowane, że pole ma dwie wartości
+blank=True - informacja dla front-endu, że pole formularza nie jest wymagane
+przeważnie idzie w parze z null=True
+w przypadku CharField i TextField nie ustawiamy null=True, tylko blank=True,
+wartość tekstowa jest zapisywana jako pusty string ''
+null=True mogłoby być zinterpretowane jako druga wartość pola
+zamiast tego używamy default=''
 
 lokalizacja:
 importujemy ugettext_lazy jako _
@@ -206,7 +209,10 @@ b.authors.all()
 b.authors.all()[0].id
 Author.objects.all()[0].id
 # ipython
+# informacje o obiekcie
 Author.objects?
+# wyświetlenie kodu
+UserAdmin??
 # po kropce możemy rozwinąć dostępne metody
 Author.objects.
 qs = Author.objects.all()
@@ -280,4 +286,10 @@ trzeba wybrać nie; chodzi o typ User, musimy zrobić migrację danych)
 mamy problem, ponieważ migracje aplikacji admin były zaaplikowane
 przed migracjami dla nowego usera (mamy błąd InconsistentMigrationHistory)
 usera trzeba zaprojektować na samym początku, żeby admin miał dobrą referencję
+w django mogą się pojawiać regresje przy migracjach - są poprawiane
 pomaga usunięcie bazy
+django-allauth - aplikacja do zarządzania rejestracją użytkowników
+
+# jeśli virtualenv ma dostęp do globalnych pakietów, a my chcemy tylko
+# pakiety zainstalowane lokalnie
+pip freeze --local
