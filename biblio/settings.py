@@ -57,7 +57,7 @@ class Dev(Configuration):
         'allauth.account',
         'allauth.socialaccount',
 
-        # 'allauth.socialaccount.providers.facebook',
+        'allauth.socialaccount.providers.facebook',
     ]
 
     MIDDLEWARE = [

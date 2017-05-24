@@ -17,6 +17,12 @@
             | <a href="{% url 'account_signup' %}">Załóż konto</a>
         {% endif %}
     </div>
+    <div>
+        {% load socialaccount %}
+        {% providers_media_js %}
+        <a href="{% provider_login_url 'facebook' method='js_sdk' %}"
+        >Facebook login</a>
+    </div>
     <hr>
 {% endblock %}
 <h1>biblio app</h1>
