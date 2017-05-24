@@ -130,7 +130,10 @@ class Dev(Configuration):
 
     LOCALE_PATHS = [os.path.join(BASE_DIR, 'locale')]
 
-    STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+    STATICFILES_DIRS = [
+        os.path.join(BASE_DIR, 'static'),
+        os.path.join(BASE_DIR, 'node_modules'),
+    ]
 
     AUTH_USER_MODEL = 'users.BiblioUser'
 

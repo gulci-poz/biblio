@@ -2,3 +2,4 @@
 __pycache__
 .python-version
 .secret.key
+node_modules
