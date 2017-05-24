@@ -293,3 +293,6 @@ django-allauth - aplikacja do zarządzania rejestracją użytkowników
 # jeśli virtualenv ma dostęp do globalnych pakietów, a my chcemy tylko
 # pakiety zainstalowane lokalnie
 pip freeze --local
+
+zamiast TEMPLATE_DEBUG w settings.py używamy klucza 'debug' w 'OPTIONS'
+'debug' ustawiamy tylko wtedy jeśli chcemy mieć inną wartość niż wartość DEBUG
