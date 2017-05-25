@@ -1,4 +1,5 @@
 django
 django-allauth
+django-bootstrap3
 django-configurations
 pillow

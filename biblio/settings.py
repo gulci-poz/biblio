@@ -58,6 +58,8 @@ class Dev(Configuration):
         'allauth.socialaccount',
 
         'allauth.socialaccount.providers.facebook',
+
+        'bootstrap3',
     ]
 
     MIDDLEWARE = [
@@ -128,6 +130,12 @@ class Dev(Configuration):
 
     STATIC_URL = '/static/'
 
+    STATIC_ROOT = os.path.join(BASE_DIR, 'public')
+
+    MEDIA_URL = '/media/'
+
+    MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
     LOCALE_PATHS = [os.path.join(BASE_DIR, 'locale')]
 
     STATICFILES_DIRS = [
@@ -160,3 +168,4 @@ class Production(Dev):
     DEBUG = False
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
     ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+    STATIC_URL = '/public/'

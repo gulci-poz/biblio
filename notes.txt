@@ -296,3 +296,10 @@ pip freeze --local
 
 zamiast TEMPLATE_DEBUG w settings.py używamy klucza 'debug' w 'OPTIONS'
 'debug' ustawiamy tylko wtedy jeśli chcemy mieć inną wartość niż wartość DEBUG
+
+jeśli chcemy serwować za pomocą django pliki statyczne w produkcji
+musimy do runserver użyć przełącznika --insecure
+
+pokazanie i zakończenie procesu na danym porcie
+fuser 8000/tcp
+fuser 8000/tcp -k
