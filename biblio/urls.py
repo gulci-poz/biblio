@@ -16,13 +16,17 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 
+from django.conf import settings
+from django.conf.urls.static import static
+
 from . import views
 
 urlpatterns = [
-    # url(r'^$', views.home, name='home'),
-    url(r'^$', views.index_view, name='main-page'),
-    url(r'^admin/', admin.site.urls),
-    url(r'^shelf/', include('shelf.urls', namespace='shelf')),
-    url(r'^contact/', include('contact.urls', namespace='contact')),
-    url(r'^accounts/', include('allauth.urls')),
-]
+                  # url(r'^$', views.home, name='home'),
+                  url(r'^$', views.index_view, name='main-page'),
+                  url(r'^admin/', admin.site.urls),
+                  url(r'^shelf/', include('shelf.urls', namespace='shelf')),
+                  url(r'^contact/',
+                      include('contact.urls', namespace='contact')),
+                  url(r'^accounts/', include('allauth.urls')),
+              ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

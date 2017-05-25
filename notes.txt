@@ -300,6 +300,13 @@ zamiast TEMPLATE_DEBUG w settings.py używamy klucza 'debug' w 'OPTIONS'
 jeśli chcemy serwować za pomocą django pliki statyczne w produkcji
 musimy do runserver użyć przełącznika --insecure
 
+możemy serwować pliki media w dev po dodaniu do urlpattern zwrotu
+z funkcji pomocniczej static, jest to ścieżka do MEDIA_ROOT
+ścieżka musi być lokalna i nie działa w produkcji
+
+możemy serwować pliki media jako pliki statyczne w produkcji
+musimy dodać media do STATICFILES_DIRS i zdefiniować MEDIA_URL dla produkcji
+
 pokazanie i zakończenie procesu na danym porcie
 fuser 8000/tcp
 fuser 8000/tcp -k

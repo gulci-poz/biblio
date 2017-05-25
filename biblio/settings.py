@@ -132,15 +132,16 @@ class Dev(Configuration):
 
     STATIC_ROOT = os.path.join(BASE_DIR, 'public')
 
-    MEDIA_URL = '/media/'
+    MEDIA_URL = '/upload/media/'
 
-    MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+    MEDIA_ROOT = os.path.join(BASE_DIR, 'upload/media')
 
     LOCALE_PATHS = [os.path.join(BASE_DIR, 'locale')]
 
     STATICFILES_DIRS = [
         os.path.join(BASE_DIR, 'static'),
         os.path.join(BASE_DIR, 'node_modules'),
+        os.path.join(BASE_DIR, 'upload'),
     ]
 
     AUTH_USER_MODEL = 'users.BiblioUser'
@@ -169,3 +170,4 @@ class Production(Dev):
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
     ALLOWED_HOSTS = ['localhost', '127.0.0.1']
     STATIC_URL = '/public/'
+    MEDIA_URL = '/public/media/'
