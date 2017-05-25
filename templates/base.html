@@ -1,15 +1,19 @@
 {% load static %}
+{% load bootstrap3 %}
 <!DOCTYPE html>
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
+    <title>biblio app</title>
     <link rel="stylesheet" type="text/css"
           href="{% static 'bootstrap/dist/css/bootstrap.min.css' %}">
     <link rel="stylesheet" type="text/css"
           href="{% static 'biblio/css/biblio_main.css' %}">
-    <title>biblio app</title>
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
 </head>
 <body>
+{% bootstrap_messages %}
 {% block login %}
     <div>
         {% if user.is_authenticated %}

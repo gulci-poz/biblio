@@ -164,6 +164,14 @@ class Dev(Configuration):
     # po zalogowaniu
     LOGIN_REDIRECT_URL = 'main-page'
 
+    # w przypadku urla // oznacza pobieranie pliku za pomocą protokołu,
+    # z którego korzysta strona
+    BOOTSTRAP3 = {
+        'include_jquery': True,
+        'jquery_url': STATIC_URL + 'jquery/dist/jquery.min.js',
+        'base_url': STATIC_URL + 'bootstrap/dist/',
+    }
+
 
 class Production(Dev):
     DEBUG = False
@@ -171,3 +179,8 @@ class Production(Dev):
     ALLOWED_HOSTS = ['localhost', '127.0.0.1']
     STATIC_URL = '/public/'
     MEDIA_URL = '/public/media/'
+    BOOTSTRAP3 = {
+        'include_jquery': True,
+        'jquery_url': STATIC_URL + 'jquery/dist/jquery.min.js',
+        'base_url': STATIC_URL + 'bootstrap/dist/',
+    }
