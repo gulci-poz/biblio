@@ -21,6 +21,16 @@ def get_secret_key(base_dir='.'):
     return secret_key
 
 
+def configure_bootstrap(static_url):
+    # w przypadku urla // oznacza pobieranie pliku za pomocą protokołu,
+    # z którego korzysta strona
+    return {
+        'include_jquery': True,
+        'jquery_url': static_url + 'jquery/dist/jquery.min.js',
+        'base_url': static_url + 'bootstrap/dist/',
+    }
+
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -164,13 +174,7 @@ class Dev(Configuration):
     # po zalogowaniu
     LOGIN_REDIRECT_URL = 'main-page'
 
-    # w przypadku urla // oznacza pobieranie pliku za pomocą protokołu,
-    # z którego korzysta strona
-    BOOTSTRAP3 = {
-        'include_jquery': True,
-        'jquery_url': STATIC_URL + 'jquery/dist/jquery.min.js',
-        'base_url': STATIC_URL + 'bootstrap/dist/',
-    }
+    BOOTSTRAP3 = configure_bootstrap(STATIC_URL)
 
 
 class Production(Dev):
@@ -179,8 +183,4 @@ class Production(Dev):
     ALLOWED_HOSTS = ['localhost', '127.0.0.1']
     STATIC_URL = '/public/'
     MEDIA_URL = '/public/media/'
-    BOOTSTRAP3 = {
-        'include_jquery': True,
-        'jquery_url': STATIC_URL + 'jquery/dist/jquery.min.js',
-        'base_url': STATIC_URL + 'bootstrap/dist/',
-    }
+    BOOTSTRAP3 = configure_bootstrap(STATIC_URL)
