@@ -5,6 +5,8 @@
 <head>
     <meta charset="UTF-8">
     <title>biblio app</title>
+    <link rel="shortcut icon" type="image/png"
+          href="{% static 'biblio/img/library-favicon.png' %}"/>
     <link rel="stylesheet" type="text/css"
           href="{% static 'bootstrap/dist/css/bootstrap.min.css' %}">
     <link rel="stylesheet" type="text/css"
@@ -15,27 +17,37 @@
 <body>
 {% bootstrap_messages %}
 {% block login %}
-    <div>
+    {% load socialaccount %}
+    {% providers_media_js %}
+    <div id="login-block">
         {% if user.is_authenticated %}
-            <a href="{% url 'account_logout' %}">Wyloguj się</a>
+            <a class="btn btn-default" href="{% url 'account_logout' %}">
+                Wyloguj się
+            </a>
         {% else %}
-            <a href="{% url 'account_login' %}">Zaloguj się</a>
-            | <a href="{% url 'account_signup' %}">Załóż konto</a>
+            <a class="btn btn-default" href="{% url 'account_login' %}">
+                Zaloguj się
+            </a>
+            <a class="btn btn-default"
+               href="{% provider_login_url 'facebook' method='js_sdk' %}">
+                Facebook login
+            </a>
+            <a class="btn btn-default" href="{% url 'account_signup' %}">
+                Załóż konto
+            </a>
         {% endif %}
     </div>
-    <div>
-        {% load socialaccount %}
-        {% providers_media_js %}
-        <a href="{% provider_login_url 'facebook' method='js_sdk' %}"
-        >Facebook login</a>
-    </div>
-    <hr>
 {% endblock %}
-<img src="{% static 'biblio/img/library.svg' %}" width="10%" height="10%"
-     alt="biblio app">
-<h1>biblio app</h1>
+{% block header %}
+    <div id="header-block">
+        <img src="{% static 'biblio/img/library.svg' %}" width="10%"
+             height="10%"
+             alt="biblio app">
+        <h1>biblio app</h1>
+    </div>
+{% endblock %}
 {% block content %}
-    <div>
+    <div id="content-block">
         <a href="/">Powrót do głównej strony</a>
     </div>
 {% endblock %}

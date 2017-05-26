@@ -299,6 +299,9 @@ zamiast TEMPLATE_DEBUG w settings.py używamy klucza 'debug' w 'OPTIONS'
 
 jeśli chcemy serwować za pomocą django pliki statyczne w produkcji
 musimy do runserver użyć przełącznika --insecure
+jeśli używamy django-configurations, to dodatkowo możemy użyć przełącznika
+--configuration=Production
+nie musimy wtedy ręcznie zmieniać Dev na Production w manage.py i wsgi.py
 
 pliki media są dostępne w dev pod /static/ dzięki wpisowi do STATICFILES_DIRS
 panel admin komponuje ścieżkę używając MEDIA_URL,
@@ -316,3 +319,10 @@ więc nie są konieczne zmiany w konfiguracji urli
 pokazanie i zakończenie procesu na danym porcie
 fuser 8000/tcp
 fuser 8000/tcp -k
+
+podmiana templates dla aplikacji allauth
+w głównym folderze templates projektu dodajemy folder account
+możemy ten folder dodać w templates dowolnej aplikacji,
+ale wtedy musi być ona w settings.py w INSTALLED_APPS powyżej allauth
+oryginalny folder mamy w site-packages/allauth/templates
+tworzymy wybrany plik szablonu, np. login.html, zastąpi on oryginalny szablon
