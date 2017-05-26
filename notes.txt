@@ -326,3 +326,15 @@ możemy ten folder dodać w templates dowolnej aplikacji,
 ale wtedy musi być ona w settings.py w INSTALLED_APPS powyżej allauth
 oryginalny folder mamy w site-packages/allauth/templates
 tworzymy wybrany plik szablonu, np. login.html, zastąpi on oryginalny szablon
+
+as_view() zwraca funkcję
+jeśli użyjemy as_view i dekoratora login_required (który też da nam funkcję)
+ProtectedAuthorListView = login_required(AuthorListView.as_view())
+to ProtectedAuthorListView nie możemy użyć jako klasy bazowej
+dla nowej klasy widoku
+musimy użyć method_decorator i funkcji dispatch()
+
+przed django 1.9 nie mogliśmy dekorować klasy za pomocą method_decorator
+trzeba było nadpisać metodę dispatch()
+teraz dekorujemy klasę AuthorListView i nie nadpisujemy metody dispatch()
+w urls.py dekorujemy dany widok za pomocą login_required

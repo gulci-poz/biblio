@@ -1,4 +1,5 @@
 from django.conf.urls import url
+from django.contrib.auth.decorators import login_required
 
 from .views import (AuthorDetailView, AuthorListView, BookListView,
                     BookDetailView)
@@ -7,7 +8,8 @@ from .views import (AuthorDetailView, AuthorListView, BookListView,
 # app_name = 'shelf'
 
 urlpatterns = [
-    url(r'^authors/$', AuthorListView.as_view(), name='author-list'),
+    url(r'^authors/$', login_required(AuthorListView.as_view()),
+        name='author-list'),
 
     url(r'^authors/(?P<pk>\d+)/$', AuthorDetailView.as_view(),
         name='author-detail'),
