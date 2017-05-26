@@ -176,6 +176,22 @@ class Dev(Configuration):
 
     BOOTSTRAP3 = configure_bootstrap(STATIC_URL)
 
+    # LOGGING = {
+    #     'version': 1,
+    #     'disable_existing_loggers': False,
+    #     'handlers': {
+    #         'console': {
+    #             'class': 'logging.StreamHandler',
+    #         },
+    #     },
+    #     'loggers': {
+    #         'django': {
+    #             'handlers': ['console'],
+    #             'level': os.getenv('DJANGO_LOG_LEVEL', 'INFO'),
+    #         },
+    #     },
+    # }
+
 
 class Production(Dev):
     DEBUG = False

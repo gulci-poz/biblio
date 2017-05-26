@@ -338,3 +338,25 @@ przed django 1.9 nie mogliśmy dekorować klasy za pomocą method_decorator
 trzeba było nadpisać metodę dispatch()
 teraz dekorujemy klasę AuthorListView i nie nadpisujemy metody dispatch()
 w urls.py dekorujemy dany widok za pomocą login_required
+istnieje też permission_required
+
+from users.models import BiblioUser
+user = BiblioUser.objects.all()[0]
+user.user_permissions.all()
+
+from django.contrib.auth.models import Permission
+# szukanie atrybutów obiektu
+p=Permission.objects.all().last()
+p.codename
+p.name
+p.content_type
+p.content_type_id
+Permission.objects.filter(codename='can_rent')[0]
+Permission.objects.filter(name='Can rent a book')[0]
+
+# get() zwróci ilość, jeśli jest więcej niż jeden obiekt
+p=Permission.objects.get(codename='can_rent')
+# dodanie uprawnienia użytkownikowi
+user.user_permissions.add(p)
+# nie jest konieczne, gdyż add dodaje wpis do tabeli pośredniej m2m
+user.save()
