@@ -5,7 +5,7 @@ from django.dispatch import receiver
 import logging
 
 # ustawienia można dać w zmiennej LOGGING w settings.py
-logger = logging.getLogger(__name__)
+logger = logging.getLogger('django')
 
 
 class BiblioUser(AbstractUser):
@@ -14,7 +14,7 @@ class BiblioUser(AbstractUser):
 
     class Meta:
         # to uprawnienie powinno się znajdować w aplikacji rental
-        # kontekst wypożyczania jest związany z aplikację rental
+        # kontekst wypożyczania jest związany z aplikacją rental
         permissions = (
             ('can_rent', 'Can rent a book'),
         )
@@ -23,7 +23,7 @@ class BiblioUser(AbstractUser):
     # w przypadku domyślnego użytkownika django nie mamy dostępu do save
     # i musimy korzystać z sygnałów
     # def save(self, *args, **kwargs):
-    #     # najpierw musimy zapisać użytkownika (potrzebujemy id),
+    #     # najpierw musimy zapisać użytkownika, ponieważ potrzebujemy id,
     #     # potem możemy nadać mu uprawnienia
     #     super(BiblioUser, self).save(*args, **kwargs)
     #     try:
