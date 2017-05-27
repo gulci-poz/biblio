@@ -1,3 +1,9 @@
-from django.shortcuts import render
+from django.views.generic.edit import CreateView
+from django.core.urlresolvers import reverse_lazy
 
-# Create your views here.
+from .models import Rental
+
+
+class BookRentView(CreateView):
+    model = Rental
+    fields = ['who', 'what']
