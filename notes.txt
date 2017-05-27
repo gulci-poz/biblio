@@ -361,7 +361,15 @@ user.user_permissions.add(p)
 # nie jest konieczne, gdyż add dodaje wpis do tabeli pośredniej m2m
 user.save()
 
-# umiejscowienie sygnałów
+sygnał musi się znajdować w miejscu,
+które będzie wykonane na starcie aplikacji, np. w modelu
+bardziej nowoczesny sposób:
 https://stackoverflow.com/questions/2719038/where-should-signal-handlers-live-in-a-django-project
 receiver idzie do app/signals/handlers.py
 rejestracja idzie do app/apps.py, w funkcji ready robimy import handlera
+
+udało się odebrać uprawnienia bez odpinania i ponownego podpinania sygnału
+
+usunięcie obiektu Permission z users
+p=Permission.objects.filter(codename='can_rent')[1]
+p.delete()

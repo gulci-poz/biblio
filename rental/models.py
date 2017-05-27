@@ -14,3 +14,26 @@ class Rental(models.Model):
     def __str__(self):
         return "{what}, rented by {who} at {when}" \
             .format(what=self.what, who=self.who, when=self.when)
+
+    # sposób 1 dodania uprawnienia użytkownikowi
+    # w przypadku domyślnego użytkownika django nie mamy dostępu do save
+    # i musimy korzystać z sygnałów
+    # def save(self, *args, **kwargs):
+    #     # najpierw musimy zapisać użytkownika, ponieważ potrzebujemy id,
+    #     # potem możemy nadać mu uprawnienia
+    #     super(BiblioUser, self).save(*args, **kwargs)
+    #     try:
+    #         p = Permission.objects.get(codename='can_rent')
+    #         self.user_permissions.add(p)
+    #         logger.info('Dodano uprawnienia')
+    #     except Exception as e:
+    #         # Permission.DoesNotExist
+    #         # inny wyjątek w razie większej liczby obiektów
+    #         logger.error('Wystąpił błąd w nadawaniu uprawnień: %s' % e)
+    #         # -> testy
+
+    class Meta:
+        # kontekst wypożyczania jest związany z aplikacją rental
+        permissions = (
+            ('can_rent', 'Can rent a book'),
+        )
