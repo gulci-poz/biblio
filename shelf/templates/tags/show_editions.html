@@ -1,6 +1,10 @@
 {% load shelf_tags %}
 <ul>
     {% for edition in editions %}
-        <li>{{ edition.publisher.name }}, {{ edition.date|pub_date }}</li>
+        <li>
+            {{ edition.publisher.name }}
+            ({{ edition.date|pub_date }}),
+            isbn: {{ edition.isbn }}
+        </li>
     {% endfor %}
 </ul>

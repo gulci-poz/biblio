@@ -96,5 +96,6 @@ class BookItem(models.Model):
 
     # get_cover_type_display() jest generowana dynamicznie dla pola z choices
     def __str__(self):
-        return "{edition}, {cover}" \
-            .format(edition=self.edition, cover=self.get_cover_type_display())
+        return "{edition}, {cover} - {number}" \
+            .format(edition=self.edition, cover=self.get_cover_type_display(),
+                    number=self.catalogue_number)

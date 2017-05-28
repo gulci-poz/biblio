@@ -1,0 +1,12 @@
+{% load shelf_tags %}
+<ul>
+    {% for item in items %}
+        <li>
+            {{ item.edition }}
+            ({{ item.edition.date|pub_date }}),
+            isbn: {{ item.edition.isbn }}
+            - egzemplarz {{ item.catalogue_number }},
+            okładka: {{ item.cover_type }}
+        </li>
+    {% endfor %}
+</ul>
