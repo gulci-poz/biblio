@@ -16,6 +16,9 @@ def show_editions(book):
 
 @register.inclusion_tag('tags/show_items.html')
 def show_items(book):
+    # alternatywne rozwiązanie:
+    # można zaimportować BookItem
+    # i zrobić zapytanie BookItem.objects.filter(edition__in=editions)
     items = []
     for edition in book.editions.all():
         for item in edition.bookitem_set.all():

@@ -29,5 +29,6 @@ urlpatterns = [
                   url(r'^contact/',
                       include('contact.urls', namespace='contact')),
                   url(r'^accounts/', include('allauth.urls')),
+                  url(r'^rental/', include('rental.urls', namespace='rental')),
                   url(r'^favicon\.ico$', views.favicon_view),
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -70,6 +70,7 @@ class Dev(Configuration):
         'allauth.socialaccount.providers.facebook',
 
         'bootstrap3',
+        'crispy_forms',
     ]
 
     MIDDLEWARE = [
@@ -191,6 +192,8 @@ class Dev(Configuration):
             },
         },
     }
+
+    CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
 
 class Production(Dev):
