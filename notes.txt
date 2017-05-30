@@ -373,3 +373,18 @@ udało się odebrać uprawnienia bez odpinania i ponownego podpinania sygnału
 usunięcie obiektu Permission z users
 p=Permission.objects.filter(codename='can_rent')[1]
 p.delete()
+
+from rental.models import BookItem
+item = BookItem.objects.all().first()
+# wypożyczenia danego egzemplarza
+item.rental_set.all()
+from django.db.models import Q
+# dostępne egzemplarze (są oddane - mają datę returned
+# lub nie ma ich w bazie rental)
+# funkcja Q() tworzy obiekt typu Q, funkcja Q() umożliwia robienie
+# bardziej złożonych zapytań do bazy, np. uwzględniających OR na warunkach
+BookItem.objects.filter(Q(rental__returned__isnull=False)|Q(rental__isnull=True))
+# po dodaniu limit_choices_to nie trzeba odświeżać modelu
+# pole limit_choices_to działa również dla formularza w aplikacji admin
+# nie możemy przeprowadzić zwrotu książki
+# nawet po dodaniu w klasie modelu admin raw_id_fields

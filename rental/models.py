@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.db import models
+# from django.db.models import Q
 from django.utils.timezone import now
 
 from shelf.models import BookItem
@@ -7,6 +8,12 @@ from shelf.models import BookItem
 
 class Rental(models.Model):
     who = models.ForeignKey(settings.AUTH_USER_MODEL)
+    # what = models.ForeignKey(BookItem,
+    #                          limit_choices_to=Q(
+    #                              rental__returned__isnull=False
+    #                          ) | Q(
+    #                              rental__isnull=True
+    #                          ))
     what = models.ForeignKey(BookItem)
     when = models.DateTimeField(default=now)
     returned = models.DateTimeField(null=True, blank=True)
