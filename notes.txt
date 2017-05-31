@@ -394,7 +394,18 @@ BookItem.objects.filter(Q(rental__returned__isnull=False)|Q(rental__isnull=True)
 
 # zapytanie do API, API zwraca obiekt JSON
 # przeglądarka domyślnie zwróci HTML
-curl -w json "http://localhost:8000/api/v1/"
+curl http://localhost:8000/api/authors/
 
 # z użyciem httpie, zwraca obiekt JSON
-http http://localhost:8000/api/v1/
+http http://localhost:8000/api/authors/
+
+# zapytanie do serwera o dostępne metody HTTP
+curl -X OPTIONS http://localhost:8000/ -i
+curl -X OPTIONS http://localhost:8000/api/ -i
+curl -X OPTIONS http://localhost:8000/api/authors/ -i
+
+# dostęp do API: w pierwszej kolejności działają uprawnienia z settings.py
+# możemy je nadpisywać dla każdego ViewSet w polu permission_classes
+
+# domyślnie możemy odpytywać API używając id
+http://localhost:8000/api/authors/2/

@@ -196,6 +196,12 @@ class Dev(Configuration):
 
     CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
+    REST_FRAMEWORK = {
+        'DEFAULT_PERMISSION_CLASSES': (
+            'rest_framework.permissions.DjangoModelPermissions',
+        ),
+    }
+
 
 class Production(Dev):
     DEBUG = False

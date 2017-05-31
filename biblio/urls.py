@@ -20,7 +20,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 from . import views
-from .api_v1 import router as v1_router
+from .api_config import router as api_config_router
 
 urlpatterns = [
                   # url(r'^$', views.home, name='home'),
@@ -32,5 +32,8 @@ urlpatterns = [
                   url(r'^accounts/', include('allauth.urls')),
                   url(r'^rental/', include('rental.urls', namespace='rental')),
                   url(r'^favicon\.ico$', views.favicon_view),
-                  url(r'^api/v1/', include(v1_router.urls)),
+                  url(r'^api/', include(api_config_router.urls)),
+                  # np. api/auth/login
+                  url(r'^api/auth/', include('rest_framework.urls',
+                                             namespace='rest_framework')),
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
