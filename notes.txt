@@ -184,6 +184,9 @@ type(value)
 # dostajemy QuerySet, typ leniwy, pośrednik w dostępnie do bazy
 # teraz dopiero poszło zapytanie do bazy
 value.filter(last_name__contains="wicz")
+# icontains - case-insensitive
+# sqlite nie obsługuje case-sensitive LIKE,
+# contains i icontains działają tu tak samo
 # dodawanie autorów do ManyToMany
 # nie możemy pod authors podstawić obiektu autora
 book = Book.objects.create(title = "Język C")
@@ -388,3 +391,10 @@ BookItem.objects.filter(Q(rental__returned__isnull=False)|Q(rental__isnull=True)
 # pole limit_choices_to działa również dla formularza w aplikacji admin
 # nie możemy przeprowadzić zwrotu książki
 # nawet po dodaniu w klasie modelu admin raw_id_fields
+
+# zapytanie do API, API zwraca obiekt JSON
+# przeglądarka domyślnie zwróci HTML
+curl -w json "http://localhost:8000/api/v1/"
+
+# z użyciem httpie, zwraca obiekt JSON
+http http://localhost:8000/api/v1/

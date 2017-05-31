@@ -71,6 +71,7 @@ class Dev(Configuration):
 
         'bootstrap3',
         'crispy_forms',
+        'rest_framework',
     ]
 
     MIDDLEWARE = [

@@ -3,4 +3,5 @@ django-allauth
 django-bootstrap3
 django-configurations
 django-crispy-forms
+djangorestframework
 pillow
